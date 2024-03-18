@@ -6,11 +6,87 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="add-button-page-container">
+    <!-- This is the button that will open the modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        Add New Game
+    </button>
+</div>
 
-<table>
+<!-- This is the modal that will be displayed when the user clicks on the "Add" button -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Product</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @* Game Id input *@
+                    <input type="hidden" id="game-id" />
+                    @* Product Name input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-name" placeholder="Product Name" />
+                        </div>
+                    </div>
+                    @* Product Description input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-description" placeholder="Product Description" />
+                        </div>
+                    </div>
+                    @* Product Price input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-price" placeholder="Product Price" />
+                        </div>
+                    </div>
+                    @* Product Quantity input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-quantity" placeholder="Product Quantity" />
+                        </div>
+                    </div>
+                    @* Product Category input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-category" placeholder="Product Category" />
+                        </div>
+                    </div>
+                    @* Product Supplier input *@
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                   id="product-supplier" placeholder="Product Supplier" />
+                        </div>
+                    </div>
+                    @* Error message paragraph *@
+                    <p id="error-message"></p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @* Add Product Button *@
+                <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreateProduct();">
+                    Add Product
+                </button>
+                @* Update Product Button *@
+                <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdateProduct();">
+                    Update Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered table-hover">
     <thead>
         <tr>
             @foreach (var game in Model)
@@ -28,5 +104,25 @@
         </tr>
     </thead>
 
-    <tbody></tbody>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>
+                    @game.GameName
+                </td>
+                <td>
+                    @game.Price
+                </td>
+                <td>
+                    @game.ReleaseDate
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = game.GameId }) |
+                    @Html.ActionLink("Details", "Details", new { id = game.GameId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = game.GameId })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

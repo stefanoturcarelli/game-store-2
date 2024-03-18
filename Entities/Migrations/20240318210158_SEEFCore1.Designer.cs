@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entities.Migrations
 {
-    [DbContext(typeof(GameContext))]
+    [DbContext(typeof(GameStoreContext))]
     [Migration("20240318210158_SEEFCore1")]
     partial class SEEFCore1
     {

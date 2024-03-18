@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Context
 {
-    public class GameContext : DbContext
+    public class GameStoreContext : DbContext
     {
-        public GameContext() : base()
+        public GameStoreContext() : base()
         {
         }
 
