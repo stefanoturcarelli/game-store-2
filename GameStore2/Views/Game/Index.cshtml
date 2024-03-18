@@ -1,0 +1,32 @@
+﻿@model List<Entities.Entities.Game>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table>
+    <thead>
+        <tr>
+            @foreach (var game in Model)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => game.GameName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => game.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => game.ReleaseDate)
+                </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+</table>
