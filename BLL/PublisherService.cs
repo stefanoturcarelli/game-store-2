@@ -23,6 +23,10 @@ namespace BLL
         }
         public GameStoreResponse CreatePublisherService(Publisher p)
         {
+            if (p == null)
+            {
+                return new GameStoreResponse("Create failed: Publisher is null");
+            }
             TrimPublisher(p);
             GameStoreResponse validation = this.ValidatePublisher(p);
             if (validation.Success)
@@ -34,6 +38,10 @@ namespace BLL
         }
         public GameStoreResponse EditPublisherService(Publisher p)
         {
+            if (p == null)
+            {
+                return new GameStoreResponse("Edit failed: Publisher is null");
+            }
             TrimPublisher(p);
             GameStoreResponse validation = this.ValidatePublisher(p);
             if (validation.Success)
@@ -52,8 +60,20 @@ namespace BLL
         /// </summary>
         private void TrimPublisher(Publisher p)
         {
+            if (p.PublisherName == null)
+            {
+                p.PublisherName = "";
+            }
             p.PublisherName = p.PublisherName.Trim();
+            if (p.PublisherEmail == null)
+            {
+                p.PublisherEmail = "";
+            }
             p.PublisherEmail = p.PublisherEmail.Trim();
+            if (p.PublisherDescription == null)
+            {
+                p.PublisherDescription = "";
+            }
             p.PublisherDescription = p.PublisherDescription.Trim();
         }
         private GameStoreResponse ValidatePublisher(Publisher p)
