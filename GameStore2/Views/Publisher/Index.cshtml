@@ -3,13 +3,14 @@
 @{
     ViewBag.Title = "Publisher";
 }
+<script src="~/js/publisher-index.js asp-append-version="true"></script>
 <div class="container text-white">
 
     <h2>Index</h2>
 
     <div class="add-button-page-container">
         <!-- This is the button that will open the modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="prepareCreatePublisher()" data-bs-target="#myModal">
             Add New Publisher
         </button>
     </div>
