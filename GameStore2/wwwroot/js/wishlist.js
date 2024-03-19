@@ -1,4 +1,9 @@
-﻿// Function to clear the wishlist
+﻿
+$(document).ready(function () {
+    ReadList();
+});
+
+// Function to clear the wishlist
 function clearList() {
     // Get the wishlist container
     var wishlistContainer = document.querySelector('.wishlsitBox');
@@ -8,6 +13,8 @@ function clearList() {
 
     // Close the modal
     closeModal();
+
+    return true;
 }
 
 // Function to open modal
@@ -129,6 +136,58 @@ function AddListInfo() {
             } else {
                 console.log('Adding a list Failed!');
             }
+        }
+    });
+}
+
+function DeleteList(wishlistId) {
+    console.log(`wishlistId: ${wishlistId}`);
+    console.log('Deleting...');
+
+    if (clearList() == true) {
+        $.ajax({
+            url: "/Wishlist/DeleteList/" + wishlistId,
+            data: { wishlistId: wishlistId },
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                ReadList();
+            },
+            error: function (errormessage) {
+                if (errormessage.status == 401)
+                    console.log('You are not authorized!');
+            }
+        });
+    }
+}
+
+
+/*--------------------------*/
+function ReadList() {
+
+    console.log('Reading...');
+
+    $.ajax({
+        url: "/Wishlist/GetAllListsService",
+        type: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            var html = '';
+            $.each(response, function (key, item) {
+                html += '<div class="gameBoxWL">';
+                html += '<p class="gameNameWL">' + item.wishlistName + '</p>';
+                html += '<p class="descriptionWL">' + item.wishlistDescription + '</p>';
+                html += '</div>';
+            });
+            $('.wishlsitBox').html(html);
+
+            console.log('Worked');
+        },
+        error: function (errormessage) {
+            console.log(errormessage.responseText);
         }
     });
 }

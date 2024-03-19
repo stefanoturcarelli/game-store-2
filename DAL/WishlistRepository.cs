@@ -1,5 +1,6 @@
 ﻿using Entities.Context;
 using Entities.Entities;
+using Entities.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ namespace DAL
         {
             User user = new User();
 
-            
 
             if (listFormDataObject != null)
             {
@@ -29,6 +29,24 @@ namespace DAL
             {
                 return "error";
             }
+        }
+
+        public GameStoreResponse DeleteListRepository(int WishlistId)
+        {
+
+            GSC.Wishlists.RemoveRange();
+
+
+            return new GameStoreResponse("Delete failed: Cannot find list with id " + WishlistId);
+        }
+
+        public List<Wishlist> GetAllListsRepository()
+        {
+            return GSC.Wishlists.ToList();
+        }
+        public Wishlist? GetListByIdRepository(int WishlistId)
+        {
+            return GSC.Wishlists.Where(x => x.WishlistId == WishlistId).FirstOrDefault();
         }
 
     }
