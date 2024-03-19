@@ -34,6 +34,9 @@ function addList() {
     var listTitle = listTitleInput.value.trim();
     var listDescription = listDescriptionInput.value.trim();
 
+    //calling back-end function
+    AddListInfo()
+
     // Remove any existing error messages
     removeErrorMessage(listTitleInput);
     removeErrorMessage(listDescriptionInput);
@@ -101,3 +104,31 @@ function removeErrorMessage(inputElement) {
 // Add event listeners
 document.querySelector(".clearList").addEventListener("click", openModal);
 document.querySelector(".addGame").addEventListener("click", openAddListModal);
+
+/*---------------------------------------------*/
+
+function AddListInfo() {
+
+    console.log('Adding event...');
+
+    var listFormDataObject = {
+        wishlistName: $('#listTitle').val(),
+        wishlistDescription: $('#listDescription').val()
+    };
+    console.log(`listTitle${listFormDataObject.wishlistName}`);
+    console.log(`listDescription${listFormDataObject.wishlistDescription}`);
+
+    $.ajax({
+        url: '/Wishlist/RegisterListController',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(listFormDataObject),
+        success: function (response) {
+            if (response === 'success') {
+                console.log('list added Successfully!');
+            } else {
+                console.log('Adding a list Failed!');
+            }
+        }
+    });
+}

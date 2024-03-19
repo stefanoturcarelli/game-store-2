@@ -39,37 +39,6 @@ p {
     color: #fff;
 }
 
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav {
-    background-color: #000000;
-    padding: 2rem 0;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
-
-    nav ul {
-        display: flex;
-    }
-
-        nav ul li {
-            list-style: none;
-            margin-right: 2rem;
-        }
-
-            nav ul li a {
-                text-decoration: none;
-                color: #fff;
-                font-size: 2rem;
-            }
-
-                nav ul li a:hover {
-                    text-decoration: underline;
-                }
-
 footer {
     background-color: #000000;
     padding: 2rem 0;

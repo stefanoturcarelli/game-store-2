@@ -18,11 +18,5 @@ namespace Entities.Entities
 
         public string WishlistDescription { get; set; }
 
-        // Foreign key property
-        public int UserId { get; set; }
-
-        // Navigation property
-        [ForeignKey("UserId")]
-        public User User { get; set; }
     }
 }
