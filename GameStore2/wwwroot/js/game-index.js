@@ -3,6 +3,13 @@
 
 // Write your JavaScript code.
 
+var gameFilter = {
+    PublisherId: null,
+    GenreId: null,
+    PlatformId: null,
+    SearchString: null
+};
+
 $(document).ready(function () {
     ReadGames();
     loadDropDowns();
@@ -11,8 +18,9 @@ $(document).ready(function () {
 
 function ReadGames() {
     $.ajax({
-        url: "/Game/ReadGames",
+        url: "/Game/ReadGamesFilter",
         type: "GET",
+        data: { PublisherId: gameFilter.PublisherId, PlatformId: gameFilter.PlatformId, GenreId: gameFilter.GenreId},
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
@@ -70,6 +78,27 @@ function prepareCreateGame() {
 
 function loadDropDowns() {
     var genreElement = document.getElementById('game-genre');
+    var genreFilter = document.getElementById('filter-genre');
+    var platformElement = document.getElementById('game-platform');
+    var platformFilter = document.getElementById('filter-platform');
+    var publisherElement = document.getElementById('game-publisher');
+    var publisherFilter = document.getElementById('filter-publisher');
+
+    var nullElement = document.createElement("option");
+    nullElement.innerHTML = "None";
+    nullElement.setAttribute("value", null);
+    genreFilter.appendChild(nullElement);
+
+    nullElement = document.createElement("option");
+    nullElement.innerHTML = "None";
+    nullElement.setAttribute("value", null);
+    platformFilter.appendChild(nullElement);
+
+    nullElement = document.createElement("option");
+    nullElement.innerHTML = "None";
+    nullElement.setAttribute("value", null);
+    publisherFilter.appendChild(nullElement);
+
     $.ajax({
         url: "/Game/GetAllGenres",
         type: "GET",
@@ -81,12 +110,17 @@ function loadDropDowns() {
                 element.innerHTML = g.genreName;
                 element.setAttribute("value", g.genreId);
                 genreElement.appendChild(element);
+
+                element = document.createElement("option");
+                element.innerHTML = g.genreName;
+                element.setAttribute("value", g.genreId);
+                genreFilter.appendChild(element);
             })
         },
         error: function (errormessage) {
         }
     });
-    var platformElement = document.getElementById('game-platform');
+    
     $.ajax({
         url: "/Game/GetAllPlatforms",
         type: "GET",
@@ -98,12 +132,17 @@ function loadDropDowns() {
                 element.innerHTML = p.platformName;
                 element.setAttribute("value", p.platformId);
                 platformElement.appendChild(element);
+
+                element = document.createElement("option");
+                element.innerHTML = p.platformName;
+                element.setAttribute("value", p.platformId);
+                platformFilter.appendChild(element);
             })
         },
         error: function (errormessage) {
         }
     });
-    var publisherElement = document.getElementById('game-publisher');
+    
     $.ajax({
         url: "/Game/GetAllPublishers",
         type: "GET",
@@ -115,11 +154,30 @@ function loadDropDowns() {
                 element.innerHTML = p.publisherName;
                 element.setAttribute("value", p.publisherId);
                 publisherElement.appendChild(element);
+
+                element = document.createElement("option");
+                element.innerHTML = p.publisherName;
+                element.setAttribute("value", p.publisherId);
+                publisherFilter.appendChild(element);
             })
         },
         error: function (errormessage) {
         }
     });
+
+
+    genreFilter.addEventListener('change', e => {
+        gameFilter.GenreId = e.target.value;
+        ReadGames();
+    })
+    platformFilter.addEventListener('change', e => {
+        gameFilter.PlatformId = e.target.value;
+        ReadGames();
+    })
+    publisherFilter.addEventListener('change', e => {
+        gameFilter.PublisherId = e.target.value;
+        ReadGames();
+    })
 }
 
 function CreateGame() {

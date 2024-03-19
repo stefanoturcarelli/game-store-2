@@ -10,11 +10,17 @@
         Games
     </h2>
 
-    <div class="add-button-page-container">
-        <!-- This is the button that will open the modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="prepareCreateGame()">
-            Add New Game
-        </button>
+    <div class="d-flex flex-row">
+        <div class="add-button-page-container" style="width:50%">
+            <!-- This is the button that will open the modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="prepareCreateGame()">
+                Add New Game
+            </button>
+        </div>
+        <p class="mb-0" style="line-height:38px">Filter:</p>
+        <select name="filter genre" class="form-control" id="filter-genre" style="width:16%"></select>
+        <select name="filter publisher" class="form-control" id="filter-publisher" style="width:16%"></select>
+        <select name="filter publisher" class="form-control" id="filter-platform" style="width:16%"></select>
     </div>
 
     <!-- This is the modal that will be displayed when the user clicks on the "Add" button -->
@@ -96,7 +102,7 @@
     </div>
 
 
-    <table class="table table-bordered table-hover text-white">
+    <table class="table table-bordered table-hover text-white mt-1" style>
         <thead>
             <tr>
                 <th>publisherId</th>

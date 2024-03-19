@@ -28,6 +28,18 @@ namespace GameStore2.Controllers
         }
 
         [HttpGet]
+        public JsonResult ReadGamesFilter(int? PublisherId, int? PlatformId, int? GenreId)
+        {
+            Entities.Entities.DTO.GameFilter.GameFilter filter = new Entities.Entities.DTO.GameFilter.GameFilter();
+            filter.PublisherId = PublisherId;
+            filter.PlatformId = PlatformId;
+            filter.GenreId = GenreId;
+            var products = gameService.GetAllGamesByFilterService(filter);
+
+            return Json(products);
+        }
+
+        [HttpGet]
         public JsonResult ReadGameById(int gameId)
         {
             var specificGame = gameService.GetGameByIdService(gameId);
