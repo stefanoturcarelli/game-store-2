@@ -1,11 +1,13 @@
-﻿@model List<Entities.Entities.Game>
+﻿@* @model List<Entities.Entities.Game> *@
 
 @{
     ViewBag.Title = "Games";
 }
 <div class="container text-white">
 
-    <h2>Index</h2>
+    <h2>
+        Games
+    </h2>
 
     <div class="add-button-page-container">
         <!-- This is the button that will open the modal -->
@@ -19,53 +21,62 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Product</h4>
+                    <h4 class="modal-title text-dark">
+                        Add Game
+                    </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         @* Game Id input *@
                         <input type="hidden" id="game-id" />
-                        @* Product Name input *@
+                        @* Game Name input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
-                                       id="product-name" placeholder="Product Name" />
+                                       id="game-name" placeholder="Name" />
                             </div>
                         </div>
-                        @* Product Description input *@
+                        @* Game Description input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
-                                       id="product-description" placeholder="Product Description" />
+                                       id="game-description" placeholder="Description" />
                             </div>
                         </div>
-                        @* Product Price input *@
+                        @* Release Date input *@
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="product-price" placeholder="Product Price" />
+                                <input type="datetime-local" class="form-control"
+                                       id="game-release-date" placeholder="Release Date" />
                             </div>
                         </div>
-                        @* Product Quantity input *@
+                        @* Price input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
-                                       id="product-quantity" placeholder="Product Quantity" />
+                                       id="game-price" placeholder="Price" />
                             </div>
                         </div>
-                        @* Product Category input *@
+                        @* Genre input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
-                                       id="product-category" placeholder="Product Category" />
+                                       id="game-genre" placeholder="Genre" />
                             </div>
                         </div>
-                        @* Product Supplier input *@
+                        @* Publisher input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
-                                       id="product-supplier" placeholder="Product Supplier" />
+                                       id="game-publisher" placeholder="Publisher" />
+                            </div>
+                        </div>
+                        @* Platform input *@
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       id="game-platform" placeholder="Platform" />
                             </div>
                         </div>
                         @* Error message paragraph *@
@@ -74,12 +85,12 @@
                 </div>
                 <div class="modal-footer">
                     @* Add Product Button *@
-                    <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreateProduct();">
-                        Add Product
+                    <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreateGame()">
+                        Add Game
                     </button>
                     @* Update Product Button *@
-                    <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdateProduct();">
-                        Update Product
+                    <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdateGame()">
+                        Update Game
                     </button>
                 </div>
             </div>
@@ -90,41 +101,17 @@
     <table class="table table-bordered table-hover text-white">
         <thead>
             <tr>
-                @foreach (var game in Model)
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => game.GameName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => game.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => game.ReleaseDate)
-                    </th>
-                }
+                <th>publisherId</th>
+                <th>platformId</th>
+                <th>gameName</th>
+                <th>genreId</th>
+                <th>price</th>
+                <th>releaseDate</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
-        <tbody>
-            @foreach (var game in Model)
-            {
-                <tr>
-                    <td>
-                        @game.GameName
-                    </td>
-                    <td>
-                        @game.Price
-                    </td>
-                    <td>
-                        @game.ReleaseDate
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = game.GameId }) |
-                        @Html.ActionLink("Details", "Details", new { id = game.GameId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = game.GameId })
-                    </td>
-                </tr>
-            }
+        <tbody class="tbody">
         </tbody>
     </table>
 
