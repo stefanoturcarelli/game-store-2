@@ -85,17 +85,17 @@ function loadDropDowns() {
     var publisherFilter = document.getElementById('filter-publisher');
 
     var nullElement = document.createElement("option");
-    nullElement.innerHTML = "None";
+    nullElement.innerHTML = "All";
     nullElement.setAttribute("value", null);
     genreFilter.appendChild(nullElement);
 
     nullElement = document.createElement("option");
-    nullElement.innerHTML = "None";
+    nullElement.innerHTML = "All";
     nullElement.setAttribute("value", null);
     platformFilter.appendChild(nullElement);
 
     nullElement = document.createElement("option");
-    nullElement.innerHTML = "None";
+    nullElement.innerHTML = "All";
     nullElement.setAttribute("value", null);
     publisherFilter.appendChild(nullElement);
 
