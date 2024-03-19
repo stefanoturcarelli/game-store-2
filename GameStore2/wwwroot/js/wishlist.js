@@ -1,0 +1,103 @@
+﻿// Function to clear the wishlist
+function clearList() {
+    // Get the wishlist container
+    var wishlistContainer = document.querySelector('.wishlsitBox');
+
+    // Remove all child elements inside the wishlist container
+    wishlistContainer.innerHTML = '';
+
+    // Close the modal
+    closeModal();
+}
+
+// Function to open modal
+function openModal() {
+    document.getElementById("myModal").style.display = "block";
+}
+
+// Function to close modal
+function closeModal() {
+    document.querySelectorAll(".modal").forEach(function (modal) {
+        modal.style.display = "none";
+    });
+}
+
+// Function to open add list modal
+function openAddListModal() {
+    document.getElementById("addListModal").style.display = "block";
+}
+
+// Function to add list
+function addList() {
+    var listTitleInput = document.getElementById("listTitle");
+    var listDescriptionInput = document.getElementById("listDescription");
+    var listTitle = listTitleInput.value.trim();
+    var listDescription = listDescriptionInput.value.trim();
+
+    // Remove any existing error messages
+    removeErrorMessage(listTitleInput);
+    removeErrorMessage(listDescriptionInput);
+
+    // Check if both inputs are empty
+    if (listTitle === '' && listDescription === '') {
+        displayErrorMessage(listTitleInput, 'Please enter a list title.');
+        displayErrorMessage(listDescriptionInput, 'Please enter a list description.');
+        return;
+    }
+
+    // Check if the list title is empty
+    if (listTitle === '') {
+        displayErrorMessage(listTitleInput, 'Please enter a list title.');
+        return;
+    }
+
+    // Check if the list description is empty
+    if (listDescription === '') {
+        displayErrorMessage(listDescriptionInput, 'Please enter a list description.');
+        return;
+    }
+
+    // Create a new game box div
+    var newGameBox = document.createElement('div');
+    newGameBox.classList.add('gameBoxWL');
+
+    // Create and set the title element
+    var titleElement = document.createElement('p');
+    titleElement.classList.add('gameNameWL');
+    titleElement.textContent = listTitle;
+    newGameBox.appendChild(titleElement);
+
+    // Create and set the description element
+    var descriptionElement = document.createElement('p');
+    descriptionElement.classList.add('descriptionWL');
+    descriptionElement.textContent = listDescription;
+    newGameBox.appendChild(descriptionElement);
+
+    // Append the new game box to the wishlist container
+    var wishlistContainer = document.querySelector('.wishlsitBox');
+    wishlistContainer.appendChild(newGameBox);
+
+    // Close the modal
+    closeModal();
+}
+
+// Function to display error message
+function displayErrorMessage(inputElement, message) {
+    var errorMessage = document.createElement('span');
+    errorMessage.classList.add('error-message');
+    errorMessage.style.color = 'red';
+    errorMessage.textContent = message;
+    inputElement.parentNode.insertBefore(errorMessage, inputElement.nextSibling);
+}
+
+// Function to remove error message
+function removeErrorMessage(inputElement) {
+    var errorMessage = inputElement.parentNode.querySelector('.error-message');
+    if (errorMessage) {
+        errorMessage.parentNode.removeChild(errorMessage);
+    }
+}
+
+// Add event listeners
+document.querySelector(".clearList").addEventListener("click", openModal);
+document.querySelector(".addGame").addEventListener("click", openAddListModal);
