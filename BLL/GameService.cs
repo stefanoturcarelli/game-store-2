@@ -23,6 +23,10 @@ namespace BLL
         }
         public GameStoreResponse CreateGameService(Game g)
         {
+            if (g == null)
+            {
+                return new GameStoreResponse("Create failed: Game is null");
+            }
             this.TrimGame(g);
             GameStoreResponse validation = this.ValidateGame(g);
             if (validation.Success)
@@ -34,6 +38,10 @@ namespace BLL
         }
         public GameStoreResponse EditGameService(Game g)
         {
+            if (g == null)
+            {
+                return new GameStoreResponse("Edit failed: Game is null");
+            }
             this.TrimGame(g);
             GameStoreResponse validation = this.ValidateGame(g);
             if (validation.Success)
@@ -57,7 +65,15 @@ namespace BLL
         /// </summary>
         private void TrimGame(Game g)
         {
+            if (g.GameName==null)
+            {
+                g.GameName = "";
+            }
             g.GameName = g.GameName.Trim();
+            if (g.GameDescription == null)
+            {
+                g.GameDescription = "";
+            }
             g.GameDescription = g.GameDescription.Trim();
         }
         private GameStoreResponse ValidateGame(Game g)

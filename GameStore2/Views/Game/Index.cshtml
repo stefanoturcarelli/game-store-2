@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Games";
 }
+<script src="~/js/game-index.js" asp-append-version="true"></script>
 <div class="container text-white">
 
     <h2>
@@ -11,7 +12,7 @@
 
     <div class="add-button-page-container">
         <!-- This is the button that will open the modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="prepareCreateGame()">
             Add New Game
         </button>
     </div>
@@ -47,7 +48,7 @@
                         @* Release Date input *@
                         <div class="row">
                             <div class="form-group">
-                                <input type="datetime-local" class="form-control"
+                                <input type="date" class="form-control"
                                        id="game-release-date" placeholder="Release Date" />
                             </div>
                         </div>
@@ -61,22 +62,19 @@
                         @* Genre input *@
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="game-genre" placeholder="Genre" />
+                                <select name="genre" class="form-control" id="game-genre"></select>
                             </div>
                         </div>
                         @* Publisher input *@
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="game-publisher" placeholder="Publisher" />
+                                <select name="publisher" class="form-control" id="game-publisher"></select>
                             </div>
                         </div>
                         @* Platform input *@
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="game-platform" placeholder="Platform" />
+                                <select name="platform" class="form-control" id="game-platform"></select>
                             </div>
                         </div>
                         @* Error message paragraph *@

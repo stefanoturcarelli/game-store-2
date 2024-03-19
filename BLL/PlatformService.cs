@@ -22,6 +22,10 @@ namespace BLL
         }
         public GameStoreResponse CreatePlatformService(Platform p)
         {
+            if (p == null)
+            {
+                return new GameStoreResponse("Create failed: Platform is null");
+            }
             TrimPlatform(p);
             GameStoreResponse validation = this.ValidatePlatform(p);
             if (validation.Success)
@@ -33,6 +37,10 @@ namespace BLL
         }
         public GameStoreResponse EditPlatformService(Platform p)
         {
+            if (p == null)
+            {
+                return new GameStoreResponse("Edit failed: Platform is null");
+            }
             TrimPlatform(p);
             GameStoreResponse validation = this.ValidatePlatform(p);
             if (validation.Success)
@@ -51,6 +59,10 @@ namespace BLL
         /// </summary>
         private void TrimPlatform(Platform p)
         {
+            if (p.PlatformName == null)
+            {
+                p.PlatformName = "";
+            }
             p.PlatformName = p.PlatformName.Trim();
         }
         private GameStoreResponse ValidatePlatform(Platform p)

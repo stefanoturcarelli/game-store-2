@@ -36,16 +36,16 @@ namespace GameStore2.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddGame([FromBody] Game gameObj)
+        public JsonResult AddGame([FromBody] Game game)
         {
-            var response = gameService.CreateGameService(gameObj);
+            var response = gameService.CreateGameService(game);
             return Json(response);
         }
 
         [HttpPost]
-        public JsonResult UpdateGame([FromBody] Game gameToUpdate)
+        public JsonResult UpdateGame([FromBody] Game game)
         {
-            var gameEdited = gameService.EditGameService(gameToUpdate);
+            var gameEdited = gameService.EditGameService(game);
             return Json(gameEdited);
         }
 
@@ -56,6 +56,25 @@ namespace GameStore2.Controllers
 
             return Json(gameDeleted);
 
+        }
+
+        [HttpGet]
+        public JsonResult GetAllGenres()
+        {
+            //TEMP
+            return Json(new GenreService().GetAllGenresService());
+        }
+        [HttpGet]
+        public JsonResult GetAllPlatforms()
+        {
+            //TEMP
+            return Json(new PlatformService().GetAllPlatformsService());
+        }
+        [HttpGet]
+        public JsonResult GetAllPublishers()
+        {
+            //TEMP
+            return Json(new PublisherService().GetAllPublishersService());
         }
     }
 }

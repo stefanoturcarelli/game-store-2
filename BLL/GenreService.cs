@@ -22,6 +22,10 @@ namespace BLL
         }
         public GameStoreResponse CreateGenreService(Genre g)
         {
+            if (g == null)
+            {
+                return new GameStoreResponse("Create failed: Genre is null");
+            }
             TrimGenre(g);
             GameStoreResponse validation = this.ValidateGenre(g);
             if (validation.Success)
@@ -33,6 +37,10 @@ namespace BLL
         }
         public GameStoreResponse EditGenreService(Genre g)
         {
+            if (g == null)
+            {
+                return new GameStoreResponse("Edit failed: Genre is null");
+            }
             TrimGenre(g);
             GameStoreResponse validation = this.ValidateGenre(g);
             if (validation.Success)
@@ -51,6 +59,10 @@ namespace BLL
         /// </summary>
         private void TrimGenre(Genre g)
         {
+            if (g.GenreName == null)
+            {
+                g.GenreName = "";
+            }
             g.GenreName = g.GenreName.Trim();
         }
         private GameStoreResponse ValidateGenre(Genre g)
