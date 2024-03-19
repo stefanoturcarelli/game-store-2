@@ -88,7 +88,7 @@ function CreatePublishers() {
                 $('#update-button').hide();
                 $('#create-button').show();
 
-                prepareCreatePublisher();
+                ReadPublisher();
 
             }
             else {
@@ -122,7 +122,7 @@ function UpdatePublishers() {
         success: function (response) {
             console.log(response);
 
-            prepareEditPublisher();
+            ReadPublisher();
 
             $('#myModal').modal('hide');
             $('.modal-backdrop').remove();
@@ -146,7 +146,7 @@ function DeletePublisher(publisherId) {
             dataType: "json",
             success: function (response) {
                 console.log(response);
-                UpdatePublishers();
+                ReadPublisher();
             },
             error: function (errormessage) {
                 if (errormessage.status == 401)
