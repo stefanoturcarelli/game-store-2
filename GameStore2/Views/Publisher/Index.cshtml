@@ -10,7 +10,7 @@
 
     <div class="add-button-page-container">
         <!-- This is the button that will open the modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="prepareCreatePublisher()" data-bs-target="#myModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="ReadPublisher()" data-bs-target="#myModal">
             Add New Publisher
         </button>
     </div>
@@ -27,14 +27,14 @@
                     <form>
                         @* Publisher Id input *@
                         <input type="hidden" id="publisher-id" />
-                        @* Product Name input *@
+                        @* Publisher Name input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
                                        id="publisher-name" placeholder="Publisher Name" />
                             </div>
                         </div>
-                        @* Product Email input *@
+                        @* Publisher Email input *@
                         <div class="row">
                             <div class="form-group">
                                 <input type="text" class="form-control"
@@ -48,38 +48,17 @@
                                        id="publisher-description" placeholder="Publisher Description" />
                             </div>
                         </div>
-                        @* Publisher Quantity input *@
-                        <div class="row">
-                            <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="product-quantity" placeholder="Product Quantity" />
-                            </div>
-                        </div>
-                        @* Publisher Category input *@
-                        <div class="row">
-                            <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="publisher-category" placeholder="Publisher Category" />
-                            </div>
-                        </div>
-                        @* Publisher Supplier input *@
-                        <div class="row">
-                            <div class="form-group">
-                                <input type="text" class="form-control"
-                                       id="publisher-supplier" placeholder="Publisher Supplier" />
-                            </div>
-                        </div>
                         @* Error message paragraph *@
                         <p id="error-message"></p>
                     </form>
                 </div>
                 <div class="modal-footer">
                     @* Add Publisher Button *@
-                    <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreatePublisher();">
+                    <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreatePublishers();">
                         Add Publisher
                     </button>
                     @* Update Publisher Button *@
-                    <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdatePublisher();">
+                    <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdatePublishers();">
                         Update Publisher
                     </button>
                 </div>
@@ -91,41 +70,13 @@
     <table class="table table-bordered table-hover text-white">
         <thead>
             <tr>
-                @foreach (var publisher in Model)
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => publisher.PublisherName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => publisher.PublisherEmail)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => publisher.PublisherDescription)
-                    </th>
-                }
+                <th>publisherName</th>
+                <th>publisherEmail</th>
+                <th>publisherDescription</th>
             </tr>
         </thead>
 
-        <tbody>
-            @foreach (var publisher in Model)
-            {
-                <tr>
-                    <td>
-                        @publisher.PublisherName
-                    </td>
-                    <td>
-                        @publisher.PublisherEmail
-                    </td>
-                    <td>
-                        @publisher.PublisherDescription
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = publisher.PublisherId }) |
-                        @Html.ActionLink("Details", "Details", new { id = publisher.PublisherId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = publisher.PublisherId })
-                    </td>
-                </tr>
-            }
+        <tbody class="tbody">
         </tbody>
     </table>
 

@@ -1,16 +1,18 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+import { read } from "@popperjs/core";
+
 // Write your JavaScript code.
 
 $(document).ready(function () {
-    PublishGames();
+    ReadPublisher();
 });
 
 
-function PublishGames() {
+function ReadPublisher() {
     $.ajax({
-        url: "/Publisher/PublishGames",
+        url: "/Publisher/ReadPublisher",
         type: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -22,7 +24,7 @@ function PublishGames() {
                 html += '<td>' + item.publisherName + '</td>';
                 html += '<td>' + item.publisherEmail + '</td>';
                 html += '<td>' + item.publisherDescription + '</td>';
-                html += '<td><a class="record-action" href="#" onclick="prepareEditGame(' + (item.publisherId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
+                html += '<td><a class="record-action" href="#" onclick="prepareEditPublisher(' + (item.publisherId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeletePublisher(' + (item.publisherId || '') + ')">Delete</a></td>';
                 html += '</tr>';
             });
             $('.tbody').html(html);
@@ -33,11 +35,11 @@ function PublishGames() {
     });
 }
 
-function prepareEditGame(publisherId) {
+function prepareEditPublisher(publisherId) {
     $.ajax({
-        url: "/Game/ReadGameById/" + publisherId,
+        url: "/Publisher/PublishById/" + publisherId,
         type: "GET",
-        data: { gameId: gameId },
+        data: { publisherId: publisherId },
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
@@ -62,16 +64,16 @@ function prepareCreatePublisher() {
 }
 
 function CreatePublishers() {
-    var gameObj = {
+    var publisherFormDataObject = {
         publisherName: $('#publisher-name').val(),
         publisherDescription: $('#publisher-description').val(),
-        publisherEmail: $('#game-release-date').val(),
+        publisherEmail: $('#publisher-email').val(),
     }
 
     $.ajax({
-        url: "/Publisher/AddPublisher",
+        url: "/Publisher/CreatePublishers",
         type: "POST",
-        data: JSON.stringify(gameObj),
+        data: JSON.stringify(publisherFormDataObject),
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
@@ -86,7 +88,7 @@ function CreatePublishers() {
                 $('#update-button').hide();
                 $('#create-button').show();
 
-                PublishGames();
+                prepareCreatePublisher();
 
             }
             else {
@@ -101,8 +103,8 @@ function CreatePublishers() {
 }
 
 
-function UpdatePublisher() {
-    var gameObj = {
+function UpdatePublishers() {
+    var publisherFormDataObject = {
         PublisherId: $('#publisher-id').val(),
         PublisherName: $('#publisher-name').val(),
         publisherDescription: $('#publisher-description').val(),
@@ -120,7 +122,7 @@ function UpdatePublisher() {
         success: function (response) {
             console.log(response);
 
-            ReadGames();
+            prepareEditPublisher();
 
             $('#myModal').modal('hide');
             $('.modal-backdrop').remove();
@@ -132,19 +134,19 @@ function UpdatePublisher() {
 }
 
 function DeletePublisher(publisherId) {
-    console.log(`gameId: ${publisherId}`)
+    console.log(`publisherId: ${publisherId}`)
 
     var ans = confirm('Are you sure you want to delete this publisher?');
     if (ans) {
         $.ajax({
-            url: "/Publisher/DeletePublisher/" + gameId,
+            url: "/Publisher/DeletePublisher/" + publisherId,
             data: { publisherId: publisherId },
             type: "POST",
             contentType: "application/json",
             dataType: "json",
             success: function (response) {
                 console.log(response);
-                ReadGames();
+                UpdatePublishers();
             },
             error: function (errormessage) {
                 if (errormessage.status == 401)
