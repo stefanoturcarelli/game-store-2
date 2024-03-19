@@ -7,13 +7,14 @@ using DAL;
 using Entities.Entities;
 using Entities.Entities.DTO;
 using Entities.Entities.DTO.GameFilter;
+using GameStore2.ViewModels;
 
 namespace BLL
 {
     public class GameService
     {
         GameRepository gameRepository = new GameRepository();
-        public List<Game> GetAllGamesService()
+        public List<GameViewModel> GetAllGamesService()
         {
             return gameRepository.GetAllGamesRepository();
         }

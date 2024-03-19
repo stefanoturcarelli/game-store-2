@@ -8,6 +8,52 @@ $(document).ready(function () {
     loadDropDowns();
 });
 
+//// Hardcoded mapping of IDs to names
+//var publisherNames = {
+//    1: "Publisher A",
+//    2: "Publisher B",
+//    // Add more mappings as needed
+//};
+
+//var platformNames = {
+//    1: "Platform X",
+//    2: "Platform Y",
+//    // Add more mappings as needed
+//};
+
+//var genreNames = {
+//    1: "Genre 1",
+//    2: "Genre 2",
+//    // Add more mappings as needed
+//};
+
+//function ReadGames() {
+//    $.ajax({
+//        url: "/Game/ReadGames",
+//        type: "GET",
+//        contentType: "application/json",
+//        dataType: "json",
+//        success: function (response) {
+//            var html = '';
+//            $.each(response, function (key, item) {
+//                html += '<tr>';
+//                html += '<td>' + item.publisherId + '</td>';
+//                html += '<td>' + item.platformId + '</td>';
+//                html += '<td>' + item.gameName + '</td>';
+//                html += '<td>' + item.genreId + '</td>';
+//                html += '<td>' + item.price + '</td>';
+//                html += '<td>' + item.releaseDate + '</td>';
+//                html += '<td><a class="record-action" href="#" onclick="prepareEditGame(' + (item.gameId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
+//                html += '</tr>';
+//            });
+//            $('.tbody').html(html);
+//        },
+//        error: function (errormessage) {
+//            console.log(errormessage.responseText);
+//        }
+//    });
+//}
+
 
 function ReadGames() {
     $.ajax({
@@ -19,10 +65,10 @@ function ReadGames() {
             var html = '';
             $.each(response, function (key, item) {
                 html += '<tr>';
-                html += '<td>' + item.publisherId + '</td>';
-                html += '<td>' + item.platformId + '</td>';
+                html += '<td>' + item.publisherName + '</td>'; // Accessing the publisherName property of the view model
+                html += '<td>' + item.platformName + '</td>'; // Accessing the platformName property of the view model
                 html += '<td>' + item.gameName + '</td>';
-                html += '<td>' + item.genreId + '</td>';
+                html += '<td>' + item.genreName + '</td>'; // Accessing the genreName property of the view model
                 html += '<td>' + item.price + '</td>';
                 html += '<td>' + item.releaseDate + '</td>';
                 html += '<td><a class="record-action" href="#" onclick="prepareEditGame(' + (item.gameId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
@@ -35,6 +81,35 @@ function ReadGames() {
         }
     });
 }
+
+
+//function ReadGames() {
+//    $.ajax({
+//        url: "/Game/ReadGames",
+//        type: "GET",
+//        contentType: "application/json",
+//        dataType: "json",
+//        success: function (response) {
+//            var html = '';
+//            $.each(response, function (key, item) {
+//                html += '<tr>';
+//                // Display names using hardcoded mapping
+//                html += '<td>' + publisherNames[item.publisherId] + '</td>';
+//                html += '<td>' + platformNames[item.platformId] + '</td>';
+//                html += '<td>' + item.gameName + '</td>';
+//                html += '<td>' + genreNames[item.genreId] + '</td>';
+//                html += '<td>' + item.price + '</td>';
+//                html += '<td>' + item.releaseDate + '</td>';
+//                html += '<td><a class="record-action" href="#" onclick="prepareEditGame(' + (item.gameId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
+//                html += '</tr>';
+//            });
+//            $('.tbody').html(html);
+//        },
+//        error: function (errormessage) {
+//            console.log(errormessage.responseText);
+//        }
+//    });
+//}
 
 function prepareEditGame(gameId) {
     $.ajax({

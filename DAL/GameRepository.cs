@@ -7,6 +7,7 @@ using Entities.Entities;
 using Entities.Context;
 using Entities.Entities.DTO.GameFilter;
 using Entities.Entities.DTO;
+using GameStore2.ViewModels;
 
 namespace DAL
 {
@@ -14,10 +15,29 @@ namespace DAL
     {
         GameStoreContext gameStoreContext = new GameStoreContext();
 
-        public List<Game> GetAllGamesRepository()
+
+        public List<GameViewModel> GetAllGamesRepository()
         {
-            return gameStoreContext.Games.ToList();
+            List<Game> games = gameStoreContext.Games.ToList();
+            List<Platform> platforms = gameStoreContext.Platforms.ToList();
+            List<Publisher> publishers = gameStoreContext.Publishers.ToList();
+            List<Genre> genres = gameStoreContext.Genres.ToList();
+
+            var gamesToDisplay = games.Select(s => new GameViewModel
+            {
+                GameId = s.GameId,
+                GameName = s.GameName,
+                PublisherName = publishers.Where(p => p.PublisherId == s.PublisherId).Select(p => p.PublisherName).FirstOrDefault(),
+                PlatformName = platforms.Where(p => p.PlatformId == s.PlatformId).Select(p => p.PlatformName).FirstOrDefault(),
+                GenreName = genres.Where(p => p.GenreId == s.GenreId).Select(p => p.GenreName).FirstOrDefault(),
+                Price = s.Price,
+                ReleaseDate = s.ReleaseDate
+            }).ToList();
+
+            return gamesToDisplay;
         }
+
+
         public Game? GetGameByIdRepository(int GameId)
         {
             return gameStoreContext.Games.Where(x => x.GameId == GameId).FirstOrDefault();
