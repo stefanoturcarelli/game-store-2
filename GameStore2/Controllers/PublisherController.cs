@@ -22,5 +22,37 @@ namespace GameStore2.Controllers
             var response = publisherService.CreatePublisherService(publisherFormDataObject);
             return Json(response);
         }
+
+        public JsonResult ReadPublisher()
+        {
+            var products = publisherService.GetAllPublishersService();
+
+            return Json(products);
+        }
+
+        [HttpGet]
+        public JsonResult ReadPublisherById(int publisherId)
+        {
+            var specificGame = publisherService.GetPublisherByIdService(publisherId);
+
+            return Json(specificGame);
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePublisher([FromBody] Publisher publisherToUpdate)
+        {
+            var publisherEdited = publisherService.EditPublisherService(publisherToUpdate);
+            return Json(publisherEdited);
+        }
+
+        [HttpPost]
+        public JsonResult DeletePublisher([FromRoute] int id)
+        {
+            var gameDeleted = publisherService.DeletePublisherService(id);
+
+            return Json(gameDeleted);
+
+        }
     }
 }
+

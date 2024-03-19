@@ -1,53 +1,83 @@
-﻿@model IEnumerable<Entities.Entities.Publisher>
+﻿@model List<Entities.Entities.Publisher>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Publisher";
 }
+<script src="~/js/publisher-index.js asp-append-version="true"></script>
+<div class="container text-white">
 
-<h1>View</h1>
+    <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PublisherId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublisherName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublisherEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublisherDescription)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublisherId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublisherName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublisherEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublisherDescription)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="add-button-page-container">
+        <!-- This is the button that will open the modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="prepareCreatePublisher()" data-bs-target="#myModal">
+            Add New Publisher
+        </button>
+    </div>
+
+    <!-- This is the modal that will be displayed when the user clicks on the "Add" button -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Publisher</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        @* Publisher Id input *@
+                        <input type="hidden" id="publisher-id" />
+                        @* Publisher Name input *@
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       id="publisher-name" placeholder="Publisher Name" />
+                            </div>
+                        </div>
+                        @* Publisher Email input *@
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       id="publisher-email" placeholder="Publisher Email" />
+                            </div>
+                        </div>
+                        @* Publisher Description input *@
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       id="publisher-description" placeholder="Publisher Description" />
+                            </div>
+                        </div>
+                        @* Error message paragraph *@
+                        <p id="error-message"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    @* Add Publisher Button *@
+                    <button type="button" class="btn btn-outline-primary" id="create-button" onclick="CreatePublishers();">
+                        Add Publisher
+                    </button>
+                    @* Update Publisher Button *@
+                    <button type="button" class="btn btn-outline-primary" id="update-button" onclick="UpdatePublishers();">
+                        Update Publisher
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-hover text-white">
+        <thead>
+            <tr>
+                <th>publisherName</th>
+                <th>publisherEmail</th>
+                <th>publisherDescription</th>
+            </tr>
+        </thead>
+
+        <tbody class="tbody">
+        </tbody>
+    </table>
+
+</div>
