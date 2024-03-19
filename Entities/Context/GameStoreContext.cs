@@ -22,5 +22,8 @@ namespace Entities.Context
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Platform> Platforms { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }

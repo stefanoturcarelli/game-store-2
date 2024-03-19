@@ -1,0 +1,62 @@
+﻿<head>
+    <title>@ViewData["Title"] - Wishlist</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    @* <link rel="stylesheet" href="~/MVC_GameStore.styles.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/css/wishlist.css" asp-append-version="true" />
+    <script src="./js/wishlist.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+</head>
+
+<section>
+    <div class="container">
+        <div class="pageTop">
+            <h2 class="pageTitle">Wishlist</h2>
+            <div class="subBox">
+                <button class="addGame subText">Add List</button>
+                <button class="clearList subText" onclick="openModal()">Clear List</button>
+            </div>
+        </div>
+        <div>
+            <input class="searchBoxList" type="text" placeholder="Search by name">
+        </div>
+        <div class="wishlsitBox">
+            <div class="gameBox hidden">
+                <p class="nogames">No game lists</p>
+            </div>
+
+            <div class="gameBoxWL hidden">
+                <p class="gameNameWL">Title</p>
+                <p class="descriptionWL">description</p>
+            </div>
+
+        </div>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <p class="modalClear modalText text-white">Are you sure you want to delete your Wishlist?</p>
+                <div class="modal-buttons">
+                    <button class="yes-button" onclick="clearList()">Yes</button>
+                    <button class="no-button" onclick="closeModal()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Modal for adding list -->
+        <div id="addListModal" class="modal">
+            <div class="modal-content">
+                <h2>Add List</h2>
+                <div class="modal-inputs">
+                    <input type="text" id="listTitle" placeholder="List Title">
+                    <input type="text" id="listDescription" placeholder="List Description">
+                </div>
+                <div class="modal-buttons">
+                    <button class="yes-button" onclick="addList()">Add</button>
+                    <button class="no-button" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
