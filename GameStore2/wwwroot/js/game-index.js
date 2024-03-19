@@ -15,6 +15,16 @@ $(document).ready(function () {
     loadDropDowns();
 });
 
+function formatDate(date) {
+    // Convert date string to Date object
+    var releaseDate = new Date(date);
+
+    // Format the date as desired (e.g., "MM/DD/YYYY")
+    var formattedDate = (releaseDate.getMonth() + 1) + '/' + releaseDate.getDate() + '/' + releaseDate.getFullYear();
+
+    return formattedDate;
+}
+
 
 function ReadGames() {
     $.ajax({
@@ -27,13 +37,13 @@ function ReadGames() {
             var html = '';
             $.each(response, function (key, item) {
                 html += '<tr>';
-                html += '<td>' + item.publisherId + '</td>';
-                html += '<td>' + item.platformId + '</td>';
-                html += '<td>' + item.gameName + '</td>';
-                html += '<td>' + item.genreId + '</td>';
-                html += '<td>' + item.price + '</td>';
-                html += '<td>' + item.releaseDate + '</td>';
-                html += '<td><a class="record-action" href="#" onclick="prepareEditGame(' + (item.gameId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
+                html += '<td scope="col">' + item.gameName + '</td>';
+                html += '<td scope="col">' + item.price + '</td>';
+                html += '<td scope="col">' + item.genreId + '</td>';
+                html += '<td scope="col">' + item.publisherId + '</td>';
+                html += '<td scope="col">' + item.platformId + '</td>';
+                html += '<td scope="col">' + formatDate(item.releaseDate) + '</td>';
+                html += '<td scope="col"><a class="record-action" href="#" onclick="prepareEditGame(' + (item.gameId) + ')">Edit</a> | <a class="record-action record-action__delete" href="#" onClick="DeleteGame(' + (item.gameId || '') + ')">Delete</a></td>';
                 html += '</tr>';
             });
             $('.tbody').html(html);
